@@ -63,10 +63,6 @@ public class ArrayStorage implements Storage{
         return Arrays.copyOfRange(storage,0,size);
     }
 
-    public int size() {
-        return size;
-    }
-
     private int getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
             if (uuid.equals(storage[i].getUuid())) {
