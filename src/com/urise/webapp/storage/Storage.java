@@ -8,6 +8,8 @@ public interface Storage {
 
         public void clear();
 
+        public int size();
+
         public void update(Resume r);
 
         public void save(Resume r);
