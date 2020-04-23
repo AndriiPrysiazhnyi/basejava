@@ -5,12 +5,13 @@ import java.util.UUID;
 /**
  * com.urise.webapp.model.Resume class
  */
-public class Resume implements Comparable<Resume>{
+public class Resume {
 
     //Unique identifier
     private final String uuid;
 
-    public Resume(String uuid) {
+
+    public Resume(String uuid)  {
         this.uuid = uuid;
     }
 
