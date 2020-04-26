@@ -6,6 +6,7 @@ import com.urise.webapp.storage.ArrayStorage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 /**
  *
@@ -18,18 +19,18 @@ public class MainArray {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Resume r;
-        while(true){
-            System.out.println("Put one of the commands - (list | save uuid |delete uuis | get uuid | clear | exit): ");
-            String [] params = reader.readLine().trim().split(" ");
-            if(params.length<1||params.length>2){
-                System.out.println("Wrong command");
+        while (true) {
+            System.out.print("Введите одну из команд - (list | save fullName | delete uuid | get uuid | update uuid fullName | clear | exit): ");
+            String[] params = reader.readLine().trim().toLowerCase().split(" ");
+            if (params.length < 1 || params.length > 3) {
+                System.out.println("Неверная команда.");
                 continue;
             }
-            String uuid = null;
-            if(params.length==2){
-                uuid= params[1].intern();
+            String param = null;
+            if (params.length > 1) {
+                param = params[1].intern();
             }
-            switch (params[0]){
+            switch (params[0]) {
                 case "list":
                     printAll();
                     break;
@@ -37,17 +38,21 @@ public class MainArray {
                     System.out.println(ARRAY_STORAGE.size());
                     break;
                 case "save":
-                    r = new Resume(uuid);
-
+                    r = new Resume(param);
                     ARRAY_STORAGE.save(r);
                     printAll();
                     break;
+                case "update":
+                    r = new Resume(param, params[2]);
+                    ARRAY_STORAGE.update(r);
+                    printAll();
+                    break;
                 case "delete":
-                    ARRAY_STORAGE.delete(uuid);
+                    ARRAY_STORAGE.delete(param);
                     printAll();
                     break;
                 case "get":
-                    System.out.println(ARRAY_STORAGE.get(uuid));
+                    System.out.println(ARRAY_STORAGE.get(param));
                     break;
                 case "clear":
                     ARRAY_STORAGE.clear();
@@ -56,21 +61,19 @@ public class MainArray {
                 case "exit":
                     return;
                 default:
-                    System.out.println("Wrong command.");
+                    System.out.println("Неверная команда.");
                     break;
             }
-
         }
-
     }
 
-    static void printAll(){
-       Resume[] all = ARRAY_STORAGE.getAll();
+    static void printAll() {
+        List<Resume> all = ARRAY_STORAGE.getAllSorted();
         System.out.println("----------------------------");
-        if(all.length==0)
+        if (all.size() == 0) {
             System.out.println("Empty");
-        else{
-            for( Resume r :all){
+        } else {
+            for (Resume r : all) {
                 System.out.println(r);
             }
         }
