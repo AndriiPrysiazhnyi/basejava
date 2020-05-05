@@ -5,6 +5,7 @@ public enum ContactType {
     MOBILE("Mibile Phone"),
     HOME_PGONE("Home phone"),
     SKYPE("Skype"),
+    MAIL("Email"),
     LINKEDIN("Profile LinkedIn"),
     GITHUB("Profile GitHub"),
     STACKOVERFLOW("Profile Stackoverflow"),
