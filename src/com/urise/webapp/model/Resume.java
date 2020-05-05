@@ -1,5 +1,7 @@
 package com.urise.webapp.model;
 
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -10,7 +12,11 @@ public class Resume implements Comparable<Resume> {
 
     //Unique identifier
     private final String uuid;
+
     private final String fullName;
+
+    private final Map<ContactType,String> contacts = new EnumMap<>(ContactType.class);
+    private final Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
 
     public Resume(String uuid, String fullName) {
         Objects.requireNonNull(uuid,"uuid should not be null");
@@ -26,6 +32,17 @@ public class Resume implements Comparable<Resume> {
     public String getUuid() {
         return uuid;
     }
+
+    public String getContact(ContactType type){
+        return contacts.get(type);
+    }
+    public String getSection(SectionType type){
+        return contacts.get(type);
+    }
+    public void addContact(ContactType type,String value){contacts.put(type,value);}
+    public void addSection(SectionType type,Section section){sections.put(type,section);}
+
+
 
     @Override
     public String toString() {
