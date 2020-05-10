@@ -30,11 +30,10 @@ public class MainFile {
         }catch (IOException e){
             throw new RuntimeException(e);
         }
-        printDirectoryDeeply(dir);
+        printDirectoryDeeply(dir,"");
     }
 
-    //TODO make look pretty output
-    public static void printDirectoryDeeply(File dir ){
+    public static void printDirectoryDeeply(File dir,String offset ){
         File[] files = dir.listFiles();
 
         if(files!=null){
@@ -43,7 +42,7 @@ public class MainFile {
                     System.out.println("File: "+file.getName());
                 }else if(file.isDirectory()) {
                     System.out.println("Directory: " +file.getName());
-                    printDirectoryDeeply(file);
+                    printDirectoryDeeply(file,offset+"  ");
                 }
             }
         }

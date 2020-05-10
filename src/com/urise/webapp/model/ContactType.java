@@ -12,6 +12,7 @@ public enum ContactType {
     HOME_PAGE("Home Page");
 
 
+
     private String title;
 
     ContactType(String title) {
